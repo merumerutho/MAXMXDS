@@ -4,6 +4,10 @@
 
 #include <fat.h>
 #include "filesystem.h"
+
+/* libnds filesystem.h is shadowed by our local filesystem.h,
+ * so declare nitroFSInit directly. */
+bool nitroFSInit(char **basepath);
 #include "libXMX.h"
 #include "arm9_fifo.h"
 #include "screens.h"

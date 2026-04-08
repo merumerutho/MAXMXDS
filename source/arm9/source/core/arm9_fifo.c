@@ -72,7 +72,7 @@ void serviceCmd(u32 cmd, s32 param)
              * which queues it for end of pattern (or jumps immediately
              * with -DHOTCUE_JUMP_IMMEDIATELY). */
             if (!arm9_playing)
-                mmPosition((mm_word)(u8)param);
+                mmSetPositionEx((mm_word)(u8)param, 0);
             else
                 fifoSendValue32(FIFO_XMX, XMX_MKCMD(CMD_GOTO_HOTCUE, param));
             break;

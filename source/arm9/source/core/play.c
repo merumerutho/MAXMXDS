@@ -19,6 +19,6 @@ void play_stop(void)
         fifoSendAddress(FIFO_XMX, deckInfo.masBuffer);
         arm9_playing = true;
         if (arm9_cuePoints[0] > 0)
-            mmPosition((mm_word)arm9_cuePoints[0]);
+            mmSetPositionEx((mm_word)arm9_cuePoints[0], 0);
     }
 }

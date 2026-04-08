@@ -75,8 +75,7 @@ int main(void)
             arm7_pendingMASAddr = 0;
             mmStop();
             arm7_dbgStep(DBG_STEP_PLAY_CALLED);
-            /* Skip the 8-byte NDS header mmutil prepends before the MAS data */
-            mmPlayModule(addr + MAS_NDS_HEADER_SIZE, MM_PLAY_LOOP, 0);
+            mmPlayMAS(addr, MM_PLAY_LOOP, 0);
             /* Send active (bits 15:8) and BPM (bits 7:0) packed with tag 3 */
             {
                 u32 ab = (3u << 16)

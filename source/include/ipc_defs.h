@@ -8,7 +8,9 @@
 
 #include <nds.h>
 
+#ifndef PACKED
 #define PACKED __attribute__((packed))
+#endif
 
 #define FIFO_XMX  (FIFO_USER_08)
 

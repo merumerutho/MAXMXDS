@@ -148,7 +148,7 @@ static void renderPlasma(u32 t, u32 audio, u32 trans)
             s32 sx = (vx * zoom) >> 7;
 
             s32 v0 = isin(sx + t8 * speed2 + drift);
-            s32 v2 = isin(((sx + sy) * warp) >> 6 + t8);
+            s32 v2 = isin((((sx + sy) * warp) >> 6) + t8);
             s32 val = (v0 + v1 + v2 + 381) / 3;
             u8 c = 1 + (u8)(val >> 1);
             if (c > 127) c = 127;
@@ -167,7 +167,6 @@ static void renderPlasma(u32 t, u32 audio, u32 trans)
 
 static void renderMetaballs(u32 t, u32 audio, u32 trans)
 {
-    s32 t8 = t >> 8;
     s32 step = GRID_STEP;
     s32 ball_vx[NUM_BALLS], ball_vy[NUM_BALLS];
     s32 radius = 800 + (audio * 12);

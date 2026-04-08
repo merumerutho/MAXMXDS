@@ -117,6 +117,21 @@
 #define REG_SOUNDXPAN(n)    SCHANNEL_PAN(n)
 #endif
 
+/* ---------- fifoWaitAddressAsync (BlocksDS only) ---------- */
+
+/* BlocksDS provides fifoWaitAddressAsync(); devkitPro does not.
+ * Spin until an address is available, matching fifoWaitValue32 pattern. */
+#include <nds/fifocommon.h>
+#include <nds/interrupts.h>
+#ifndef fifoWaitAddressAsync
+static inline __attribute__((unused))
+void fifoWaitAddressAsync(int channel)
+{
+    while (!fifoCheckAddress(channel))
+        swiIntrWait(1, IRQ_FIFO_NOT_EMPTY);
+}
+#endif
+
 /* ---------- ARM_CODE attribute ---------- */
 
 /* BlocksDS uses ARM_CODE to force ARM (non-Thumb) code generation.
@@ -136,7 +151,7 @@
 #ifdef ARM7
 
 #ifndef getCPSR
-__attribute__((target("arm"), noinline))
+__attribute__((target("arm"), noinline, unused))
 static unsigned int getCPSR(void)
 {
     unsigned int cpsr;
@@ -146,7 +161,7 @@ static unsigned int getCPSR(void)
 #endif
 
 #ifndef setCPSR
-__attribute__((target("arm"), noinline))
+__attribute__((target("arm"), noinline, unused))
 static void setCPSR(unsigned int val)
 {
     __asm__ volatile ("msr cpsr, %0" :: "r"(val));
