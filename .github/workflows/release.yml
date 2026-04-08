@@ -17,11 +17,8 @@ jobs:
         with:
           submodules: recursive
 
-      - name: Create empty songs directory
-        run: mkdir -p songs
-
-      - name: Build native
-        run: make native
+      - name: Build native (no songs)
+        run: make nosong-native
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
