@@ -27,7 +27,7 @@ NATIVE_DIR  := release/data
 MAS_SCRIPT  := $(SRCDIR)/scripts/mas.py
 
 .PHONY: maxmod_ds7 maxmod_ds9 build_arm7 build_arm9 \
-        songs emulator native clean clean_data clean_native \
+        songs emulator native nosong-native clean clean_data clean_native \
         ensure_release ensure_maxmod
 
 #---------------------------------------------------------------------------------
@@ -72,6 +72,7 @@ help:
 	@echo "  ---------------------"
 	@echo "  make emulator  - convert songs + build .nds with NitroFS (for emulators)"
 	@echo "  make native    - convert songs + build .nds + release/data/ (for flashcarts)"
+	@echo "  make nosong-native - build .nds only, skip song conversion (for CI)"
 	@echo "  make songs     - convert tracker files in songs/ only (no build)"
 	@echo "  make clean     - remove all build artifacts and converted songs"
 	@echo ""
@@ -115,6 +116,16 @@ emulator: songs ensure_release build_arm7 build_arm9
 #---------------------------------------------------------------------------------
 # Native build: .nds with empty data/, songs go to release/data/ for flashcart SD
 native: clean_data songs_native ensure_release build_arm7 build_arm9
+	@mkdir -p $(DATA_DIR)
+	ndstool	-c release/$(TARGET).nds \
+		-7 $(SRCDIR)/arm7/$(TARGET).elf \
+		-9 $(SRCDIR)/arm9/$(TARGET).elf \
+		-b $(GAME_ICON) "$(GAME_TITLE);$(GAME_SUBTITLE1);$(GAME_SUBTITLE2)" \
+		$(_ADDFILES)
+
+#---------------------------------------------------------------------------------
+# Native build without song conversion (for CI or when no songs are present)
+nosong-native: clean_data ensure_release build_arm7 build_arm9
 	@mkdir -p $(DATA_DIR)
 	ndstool	-c release/$(TARGET).nds \
 		-7 $(SRCDIR)/arm7/$(TARGET).elf \
