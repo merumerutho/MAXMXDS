@@ -4,7 +4,7 @@ from pathlib import Path
 import argparse
 import subprocess
 
-MMUTIL_CMD = r"C:/devkitpro/tools/bin/mmutil.exe"
+MMUTIL_CMD = "mmutil"
 EXTENSIONS = {'.xm', '.mod', '.s3m', '.it'}
 TIMEOUT_S = 30
 

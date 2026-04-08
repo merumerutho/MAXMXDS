@@ -83,9 +83,27 @@ python scripts/mas.py -i /path/to/songs -o data
 
 Requires [devkitPro](https://devkitpro.org/) (devkitARM + libnds).
 
+### Song setup
+
+Create a `songs` folder at the same level as the Makefile. Inside it, organize your MOD / XM / IT / S3M files in any folder structure you like (e.g. by playlist, genre, etc.):
+
 ```
-cd source
-make
+songs/
+├── techno/
+│   ├── track1.xm
+│   └── track2.mod
+├── jungle/
+│   └── amen_break.it
+└── chill.s3m
+```
+
+All files found recursively will be converted to `.mas` format during the build.
+
+### Build targets
+
+```
+make native      # for real hardware (flashcart + DS)
+make emulator    # for emulator (No$GBA)
 ```
 
 Output: `release/MAXMXDS.nds`
