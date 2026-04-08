@@ -1,0 +1,27 @@
+# Build artifacts
+/source/arm7/build/
+/source/arm9/build/
+*.elf
+*.d
+*.o
+*.a
+*.nds
+
+# IDE / Eclipse
+/source/.settings/
+/source/.cproject
+/source/.project
+
+# Song data (user-supplied)
+data/
+songs/
+
+# Emulator state
+release/NO$GBA.INI
+release/NO$GBA.INP
+release/NO$GBA.FNT
+
+# Library build
+/source/lib/build/
+/source/lib/maxmod_build_ds7
+/source/lib/maxmod_build_ds9

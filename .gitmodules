@@ -1,0 +1,3 @@
+[submodule "source/lib/maxmod"]
+	path = source/lib/maxmod
+	url = https://github.com/merumerutho/maxmod.git
