@@ -8,22 +8,14 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    container:
+      image: devkitpro/devkitarm:latest
 
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
         with:
           submodules: recursive
-
-      - name: Setup devkitPro
-        uses: devkitPro/setup-devkitpro@v1
-        with:
-          packages: nds-dev
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: '3.x'
 
       - name: Create empty songs directory
         run: mkdir -p songs
