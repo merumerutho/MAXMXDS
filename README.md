@@ -83,6 +83,8 @@ python scripts/mas.py -i /path/to/songs -o data
 
 Requires [devkitPro](https://devkitpro.org/) (devkitARM + libnds).
 
+Also requires ```mmutil``` to be available in your environment variables.
+
 ### Song setup
 
 Create a `songs` folder at the same level as the Makefile. Inside it, organize your MOD / XM / IT / S3M files in any folder structure you like (e.g. by playlist, genre, etc.):
